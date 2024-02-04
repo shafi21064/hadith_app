@@ -12,22 +12,22 @@ class DetailsWidgets{
     return commonWidgets.customCardContainer(
         padding: const EdgeInsets.all(8),
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
             children: children
         ));
   }
 
   Widget sectionNumberOnly({required String number}){
-    return sectionColumn(
-      children: [
-        commonWidgets.textWidget(
-            text: number,
-            color: AppColor
-                .chapterLeadingIconColor,
-            fontSize: 14,
-            fontWeight: FontWeight.bold
-        ),
-      ],
+    return
+      commonWidgets.customCardContainer(
+        padding: const EdgeInsets.all(12),
+          child: commonWidgets.textWidget(
+              text: number,
+              color: AppColor
+                  .chapterLeadingIconColor,
+              fontSize: 15,
+              fontWeight: FontWeight.bold
+          ),
     );
   }
 
@@ -38,7 +38,7 @@ class DetailsWidgets{
             text: TextSpan(
                 text: number,
                 style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: AppColor
                         .chapterLeadingIconColor),
@@ -64,7 +64,7 @@ class DetailsWidgets{
       commonWidgets.textWidget(
           text: subtitle,
           color: AppColor.cardSubtitleColor,
-          fontSize: 12)
+          fontSize: 14)
     ],
     );
   }
@@ -80,5 +80,7 @@ class DetailsWidgets{
       return sectionContainerAll(number: number, title: title, subtitle: subtitle);
     }
   }
+
+
 
 }

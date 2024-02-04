@@ -62,9 +62,13 @@ class AppDb extends _$AppDb{
     return await (select(chapter)..where((tbl) => tbl.bookId.equals(booksId))).get();
   }
 
-  Future<List<HadithData>> getHadith(int booksId, int chapterId) async{
-    return await (select(hadith)..where((tbl) => tbl.bookId.equals(booksId) & tbl.chapterId.equals(chapterId))).get();
+
+  Future<List<SectionData>> getSection(int booksId, int chapterId) async{
+    return await (select(section)..where((tbl) => tbl.bookId.equals(booksId) & tbl.chapterId.equals(chapterId))).get();
   }
 
+  Future<List<HadithData>> getHadith(int booksId, int chapterId, int sectionId) async{
+    return await (select(hadith)..where((tbl) => tbl.bookId.equals(booksId) & tbl.chapterId.equals(chapterId) & tbl.sectionId.equals(sectionId))).get();
+  }
   
 }

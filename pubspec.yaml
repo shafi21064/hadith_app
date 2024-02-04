@@ -42,6 +42,7 @@ dependencies:
   path: ^1.8.3
   hexagon: ^0.2.0
   gap: ^3.0.1
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   drift_dev: ^2.15.0
@@ -70,7 +71,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/db/hadith.db
-    - assets/db/gifter.db
     - assets/icons/
 
 

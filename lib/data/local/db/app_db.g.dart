@@ -802,14 +802,14 @@ class $HadithTable extends Hadith with TableInfo<$HadithTable, HadithData> {
   static const VerificationMeta _bookIdMeta = const VerificationMeta('bookId');
   @override
   late final GeneratedColumn<int> bookId = GeneratedColumn<int>(
-      'bookId', aliasedName, false,
+      'book_id', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _bookNameMeta =
       const VerificationMeta('bookName');
   @override
-  late final GeneratedColumn<int> bookName = GeneratedColumn<int>(
+  late final GeneratedColumn<String> bookName = GeneratedColumn<String>(
       'book_name', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _chapterIdMeta =
       const VerificationMeta('chapterId');
   @override
@@ -911,9 +911,9 @@ class $HadithTable extends Hadith with TableInfo<$HadithTable, HadithData> {
     } else if (isInserting) {
       context.missing(_idMeta);
     }
-    if (data.containsKey('bookId')) {
+    if (data.containsKey('book_id')) {
       context.handle(_bookIdMeta,
-          bookId.isAcceptableOrUnknown(data['bookId']!, _bookIdMeta));
+          bookId.isAcceptableOrUnknown(data['book_id']!, _bookIdMeta));
     } else if (isInserting) {
       context.missing(_bookIdMeta);
     }
@@ -1009,9 +1009,9 @@ class $HadithTable extends Hadith with TableInfo<$HadithTable, HadithData> {
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       bookId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}bookId'])!,
+          .read(DriftSqlType.int, data['${effectivePrefix}book_id'])!,
       bookName: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}book_name'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}book_name'])!,
       chapterId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}chapter_id'])!,
       sectionId: attachedDatabase.typeMapping
@@ -1048,7 +1048,7 @@ class $HadithTable extends Hadith with TableInfo<$HadithTable, HadithData> {
 class HadithData extends DataClass implements Insertable<HadithData> {
   final int id;
   final int bookId;
-  final int bookName;
+  final String bookName;
   final int chapterId;
   final int sectionId;
   final String hadithKey;
@@ -1081,8 +1081,8 @@ class HadithData extends DataClass implements Insertable<HadithData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['bookId'] = Variable<int>(bookId);
-    map['book_name'] = Variable<int>(bookName);
+    map['book_id'] = Variable<int>(bookId);
+    map['book_name'] = Variable<String>(bookName);
     map['chapter_id'] = Variable<int>(chapterId);
     map['section_id'] = Variable<int>(sectionId);
     map['hadith_key'] = Variable<String>(hadithKey);
@@ -1124,7 +1124,7 @@ class HadithData extends DataClass implements Insertable<HadithData> {
     return HadithData(
       id: serializer.fromJson<int>(json['id']),
       bookId: serializer.fromJson<int>(json['bookId']),
-      bookName: serializer.fromJson<int>(json['bookName']),
+      bookName: serializer.fromJson<String>(json['bookName']),
       chapterId: serializer.fromJson<int>(json['chapterId']),
       sectionId: serializer.fromJson<int>(json['sectionId']),
       hadithKey: serializer.fromJson<String>(json['hadithKey']),
@@ -1145,7 +1145,7 @@ class HadithData extends DataClass implements Insertable<HadithData> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'bookId': serializer.toJson<int>(bookId),
-      'bookName': serializer.toJson<int>(bookName),
+      'bookName': serializer.toJson<String>(bookName),
       'chapterId': serializer.toJson<int>(chapterId),
       'sectionId': serializer.toJson<int>(sectionId),
       'hadithKey': serializer.toJson<String>(hadithKey),
@@ -1164,7 +1164,7 @@ class HadithData extends DataClass implements Insertable<HadithData> {
   HadithData copyWith(
           {int? id,
           int? bookId,
-          int? bookName,
+          String? bookName,
           int? chapterId,
           int? sectionId,
           String? hadithKey,
@@ -1257,7 +1257,7 @@ class HadithData extends DataClass implements Insertable<HadithData> {
 class HadithCompanion extends UpdateCompanion<HadithData> {
   final Value<int> id;
   final Value<int> bookId;
-  final Value<int> bookName;
+  final Value<String> bookName;
   final Value<int> chapterId;
   final Value<int> sectionId;
   final Value<String> hadithKey;
@@ -1292,7 +1292,7 @@ class HadithCompanion extends UpdateCompanion<HadithData> {
   HadithCompanion.insert({
     required int id,
     required int bookId,
-    required int bookName,
+    required String bookName,
     required int chapterId,
     required int sectionId,
     required String hadithKey,
@@ -1324,7 +1324,7 @@ class HadithCompanion extends UpdateCompanion<HadithData> {
   static Insertable<HadithData> custom({
     Expression<int>? id,
     Expression<int>? bookId,
-    Expression<int>? bookName,
+    Expression<String>? bookName,
     Expression<int>? chapterId,
     Expression<int>? sectionId,
     Expression<String>? hadithKey,
@@ -1341,7 +1341,7 @@ class HadithCompanion extends UpdateCompanion<HadithData> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (bookId != null) 'bookId': bookId,
+      if (bookId != null) 'book_id': bookId,
       if (bookName != null) 'book_name': bookName,
       if (chapterId != null) 'chapter_id': chapterId,
       if (sectionId != null) 'section_id': sectionId,
@@ -1362,7 +1362,7 @@ class HadithCompanion extends UpdateCompanion<HadithData> {
   HadithCompanion copyWith(
       {Value<int>? id,
       Value<int>? bookId,
-      Value<int>? bookName,
+      Value<String>? bookName,
       Value<int>? chapterId,
       Value<int>? sectionId,
       Value<String>? hadithKey,
@@ -1403,10 +1403,10 @@ class HadithCompanion extends UpdateCompanion<HadithData> {
       map['id'] = Variable<int>(id.value);
     }
     if (bookId.present) {
-      map['bookId'] = Variable<int>(bookId.value);
+      map['book_id'] = Variable<int>(bookId.value);
     }
     if (bookName.present) {
-      map['book_name'] = Variable<int>(bookName.value);
+      map['book_name'] = Variable<String>(bookName.value);
     }
     if (chapterId.present) {
       map['chapter_id'] = Variable<int>(chapterId.value);
@@ -1492,8 +1492,14 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
   static const VerificationMeta _bookNameMeta =
       const VerificationMeta('bookName');
   @override
-  late final GeneratedColumn<int> bookName = GeneratedColumn<int>(
+  late final GeneratedColumn<String> bookName = GeneratedColumn<String>(
       'book_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _chapterIdMeta =
+      const VerificationMeta('chapterId');
+  @override
+  late final GeneratedColumn<int> chapterId = GeneratedColumn<int>(
+      'chapter_id', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _sectionIdMeta =
       const VerificationMeta('sectionId');
@@ -1514,9 +1520,9 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
       type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _numberMeta = const VerificationMeta('number');
   @override
-  late final GeneratedColumn<int> number = GeneratedColumn<int>(
+  late final GeneratedColumn<String> number = GeneratedColumn<String>(
       'number', aliasedName, false,
-      type: DriftSqlType.int, requiredDuringInsert: true);
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _sortOrderMeta =
       const VerificationMeta('sortOrder');
   @override
@@ -1524,8 +1530,17 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
       'sort_order', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, bookId, bookName, sectionId, title, preface, number, sortOrder];
+  List<GeneratedColumn> get $columns => [
+        id,
+        bookId,
+        bookName,
+        chapterId,
+        sectionId,
+        title,
+        preface,
+        number,
+        sortOrder
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1552,6 +1567,12 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
           bookName.isAcceptableOrUnknown(data['book_name']!, _bookNameMeta));
     } else if (isInserting) {
       context.missing(_bookNameMeta);
+    }
+    if (data.containsKey('chapter_id')) {
+      context.handle(_chapterIdMeta,
+          chapterId.isAcceptableOrUnknown(data['chapter_id']!, _chapterIdMeta));
+    } else if (isInserting) {
+      context.missing(_chapterIdMeta);
     }
     if (data.containsKey('section_id')) {
       context.handle(_sectionIdMeta,
@@ -1597,7 +1618,9 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
       bookId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}book_id'])!,
       bookName: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}book_name'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}book_name'])!,
+      chapterId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}chapter_id'])!,
       sectionId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}section_id'])!,
       title: attachedDatabase.typeMapping
@@ -1605,7 +1628,7 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
       preface: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}preface'])!,
       number: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}number'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}number'])!,
       sortOrder: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}sort_order'])!,
     );
@@ -1620,16 +1643,18 @@ class $SectionTable extends Section with TableInfo<$SectionTable, SectionData> {
 class SectionData extends DataClass implements Insertable<SectionData> {
   final int id;
   final int bookId;
-  final int bookName;
+  final String bookName;
+  final int chapterId;
   final int sectionId;
   final String title;
   final String preface;
-  final int number;
+  final String number;
   final int sortOrder;
   const SectionData(
       {required this.id,
       required this.bookId,
       required this.bookName,
+      required this.chapterId,
       required this.sectionId,
       required this.title,
       required this.preface,
@@ -1640,11 +1665,12 @@ class SectionData extends DataClass implements Insertable<SectionData> {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['book_id'] = Variable<int>(bookId);
-    map['book_name'] = Variable<int>(bookName);
+    map['book_name'] = Variable<String>(bookName);
+    map['chapter_id'] = Variable<int>(chapterId);
     map['section_id'] = Variable<int>(sectionId);
     map['title'] = Variable<String>(title);
     map['preface'] = Variable<String>(preface);
-    map['number'] = Variable<int>(number);
+    map['number'] = Variable<String>(number);
     map['sort_order'] = Variable<int>(sortOrder);
     return map;
   }
@@ -1654,6 +1680,7 @@ class SectionData extends DataClass implements Insertable<SectionData> {
       id: Value(id),
       bookId: Value(bookId),
       bookName: Value(bookName),
+      chapterId: Value(chapterId),
       sectionId: Value(sectionId),
       title: Value(title),
       preface: Value(preface),
@@ -1668,11 +1695,12 @@ class SectionData extends DataClass implements Insertable<SectionData> {
     return SectionData(
       id: serializer.fromJson<int>(json['id']),
       bookId: serializer.fromJson<int>(json['bookId']),
-      bookName: serializer.fromJson<int>(json['bookName']),
+      bookName: serializer.fromJson<String>(json['bookName']),
+      chapterId: serializer.fromJson<int>(json['chapterId']),
       sectionId: serializer.fromJson<int>(json['sectionId']),
       title: serializer.fromJson<String>(json['title']),
       preface: serializer.fromJson<String>(json['preface']),
-      number: serializer.fromJson<int>(json['number']),
+      number: serializer.fromJson<String>(json['number']),
       sortOrder: serializer.fromJson<int>(json['sortOrder']),
     );
   }
@@ -1682,11 +1710,12 @@ class SectionData extends DataClass implements Insertable<SectionData> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'bookId': serializer.toJson<int>(bookId),
-      'bookName': serializer.toJson<int>(bookName),
+      'bookName': serializer.toJson<String>(bookName),
+      'chapterId': serializer.toJson<int>(chapterId),
       'sectionId': serializer.toJson<int>(sectionId),
       'title': serializer.toJson<String>(title),
       'preface': serializer.toJson<String>(preface),
-      'number': serializer.toJson<int>(number),
+      'number': serializer.toJson<String>(number),
       'sortOrder': serializer.toJson<int>(sortOrder),
     };
   }
@@ -1694,16 +1723,18 @@ class SectionData extends DataClass implements Insertable<SectionData> {
   SectionData copyWith(
           {int? id,
           int? bookId,
-          int? bookName,
+          String? bookName,
+          int? chapterId,
           int? sectionId,
           String? title,
           String? preface,
-          int? number,
+          String? number,
           int? sortOrder}) =>
       SectionData(
         id: id ?? this.id,
         bookId: bookId ?? this.bookId,
         bookName: bookName ?? this.bookName,
+        chapterId: chapterId ?? this.chapterId,
         sectionId: sectionId ?? this.sectionId,
         title: title ?? this.title,
         preface: preface ?? this.preface,
@@ -1716,6 +1747,7 @@ class SectionData extends DataClass implements Insertable<SectionData> {
           ..write('id: $id, ')
           ..write('bookId: $bookId, ')
           ..write('bookName: $bookName, ')
+          ..write('chapterId: $chapterId, ')
           ..write('sectionId: $sectionId, ')
           ..write('title: $title, ')
           ..write('preface: $preface, ')
@@ -1726,8 +1758,8 @@ class SectionData extends DataClass implements Insertable<SectionData> {
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, bookId, bookName, sectionId, title, preface, number, sortOrder);
+  int get hashCode => Object.hash(id, bookId, bookName, chapterId, sectionId,
+      title, preface, number, sortOrder);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1735,6 +1767,7 @@ class SectionData extends DataClass implements Insertable<SectionData> {
           other.id == this.id &&
           other.bookId == this.bookId &&
           other.bookName == this.bookName &&
+          other.chapterId == this.chapterId &&
           other.sectionId == this.sectionId &&
           other.title == this.title &&
           other.preface == this.preface &&
@@ -1745,17 +1778,19 @@ class SectionData extends DataClass implements Insertable<SectionData> {
 class SectionCompanion extends UpdateCompanion<SectionData> {
   final Value<int> id;
   final Value<int> bookId;
-  final Value<int> bookName;
+  final Value<String> bookName;
+  final Value<int> chapterId;
   final Value<int> sectionId;
   final Value<String> title;
   final Value<String> preface;
-  final Value<int> number;
+  final Value<String> number;
   final Value<int> sortOrder;
   final Value<int> rowid;
   const SectionCompanion({
     this.id = const Value.absent(),
     this.bookId = const Value.absent(),
     this.bookName = const Value.absent(),
+    this.chapterId = const Value.absent(),
     this.sectionId = const Value.absent(),
     this.title = const Value.absent(),
     this.preface = const Value.absent(),
@@ -1766,16 +1801,18 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
   SectionCompanion.insert({
     required int id,
     required int bookId,
-    required int bookName,
+    required String bookName,
+    required int chapterId,
     required int sectionId,
     required String title,
     required String preface,
-    required int number,
+    required String number,
     required int sortOrder,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         bookId = Value(bookId),
         bookName = Value(bookName),
+        chapterId = Value(chapterId),
         sectionId = Value(sectionId),
         title = Value(title),
         preface = Value(preface),
@@ -1784,11 +1821,12 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
   static Insertable<SectionData> custom({
     Expression<int>? id,
     Expression<int>? bookId,
-    Expression<int>? bookName,
+    Expression<String>? bookName,
+    Expression<int>? chapterId,
     Expression<int>? sectionId,
     Expression<String>? title,
     Expression<String>? preface,
-    Expression<int>? number,
+    Expression<String>? number,
     Expression<int>? sortOrder,
     Expression<int>? rowid,
   }) {
@@ -1796,6 +1834,7 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
       if (id != null) 'id': id,
       if (bookId != null) 'book_id': bookId,
       if (bookName != null) 'book_name': bookName,
+      if (chapterId != null) 'chapter_id': chapterId,
       if (sectionId != null) 'section_id': sectionId,
       if (title != null) 'title': title,
       if (preface != null) 'preface': preface,
@@ -1808,17 +1847,19 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
   SectionCompanion copyWith(
       {Value<int>? id,
       Value<int>? bookId,
-      Value<int>? bookName,
+      Value<String>? bookName,
+      Value<int>? chapterId,
       Value<int>? sectionId,
       Value<String>? title,
       Value<String>? preface,
-      Value<int>? number,
+      Value<String>? number,
       Value<int>? sortOrder,
       Value<int>? rowid}) {
     return SectionCompanion(
       id: id ?? this.id,
       bookId: bookId ?? this.bookId,
       bookName: bookName ?? this.bookName,
+      chapterId: chapterId ?? this.chapterId,
       sectionId: sectionId ?? this.sectionId,
       title: title ?? this.title,
       preface: preface ?? this.preface,
@@ -1838,7 +1879,10 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
       map['book_id'] = Variable<int>(bookId.value);
     }
     if (bookName.present) {
-      map['book_name'] = Variable<int>(bookName.value);
+      map['book_name'] = Variable<String>(bookName.value);
+    }
+    if (chapterId.present) {
+      map['chapter_id'] = Variable<int>(chapterId.value);
     }
     if (sectionId.present) {
       map['section_id'] = Variable<int>(sectionId.value);
@@ -1850,7 +1894,7 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
       map['preface'] = Variable<String>(preface.value);
     }
     if (number.present) {
-      map['number'] = Variable<int>(number.value);
+      map['number'] = Variable<String>(number.value);
     }
     if (sortOrder.present) {
       map['sort_order'] = Variable<int>(sortOrder.value);
@@ -1867,6 +1911,7 @@ class SectionCompanion extends UpdateCompanion<SectionData> {
           ..write('id: $id, ')
           ..write('bookId: $bookId, ')
           ..write('bookName: $bookName, ')
+          ..write('chapterId: $chapterId, ')
           ..write('sectionId: $sectionId, ')
           ..write('title: $title, ')
           ..write('preface: $preface, ')

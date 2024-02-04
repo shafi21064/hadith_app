@@ -2,8 +2,8 @@ import 'package:drift/drift.dart';
 
 class Hadith extends Table{
   IntColumn get id => integer().named('id')();
-  IntColumn get bookId => integer().named('bookId')();
-  IntColumn get bookName => integer().named('book_name')();
+  IntColumn get bookId => integer().named('book_id')();
+  TextColumn get bookName => text().named('book_name')();
   IntColumn get chapterId => integer().named('chapter_id')();
   IntColumn get sectionId => integer().named('section_id')();
   TextColumn get hadithKey => text().named('hadith_key')();

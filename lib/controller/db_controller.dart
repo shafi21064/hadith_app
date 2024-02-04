@@ -7,8 +7,6 @@ class DbController extends GetxController{
   RxList<ChapterData> chapterList = <ChapterData> [].obs;
   RxList<HadithData> hadithList = <HadithData> [].obs;
   RxList<SectionData> sectionList = <SectionData> [].obs;
-  RxList combinedList =  [].obs;
-  bool sectionHasData = false;
 
   final _appDb = Get.find<AppDb>();
 
@@ -18,34 +16,21 @@ class DbController extends GetxController{
     super.onInit();
   }
 
-  getBooksList() async {
-    bookList.value = await _appDb.getBooks;
+  Future getBooksList() async {
+    return bookList.value = await _appDb.getBooks;
   }
 
-  getChapterList(int booksId)async{
-    chapterList.value = await _appDb.getChapters(booksId);
+  Future getChapterList(int booksId)async{
+    return chapterList.value = await _appDb.getChapters(booksId);
   }
 
-  getHadithList(int booksId, int chapterId, int sectionId)async{
-    hadithList.value = await _appDb.getHadith(booksId, chapterId, sectionId);
-    print(booksId);
+  Future getHadithList(int booksId, int chapterId, int sectionId)async{
+    return hadithList.value = await _appDb.getHadith(booksId, chapterId, sectionId);
   }
 
-  getSectionList(int booksId, int chapterId)async{
-    sectionList.value = await _appDb.getSection(booksId, chapterId);
-    print(booksId);
+  Future getSectionList(int booksId, int chapterId)async{
+    return sectionList.value = await _appDb.getSection(booksId, chapterId);
   }
 
-  // getCombinedList(int booksId, int chapterId)async{
-  //   getHadithList(booksId, chapterId);
-  //   getSectionList(booksId, chapterId);
-  //   combinedList.value = [...sectionList, ...hadithList] ;
-  // }
-
-  showSection(){
-    if(sectionList.isNotEmpty){
-      sectionHasData = true;
-    }
-  }
 
 }

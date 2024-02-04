@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: center,
-      backgroundColor: AppColor.cardColor,
+      backgroundColor: AppColor.primaryColor,
       leading: customBackButton
           ? IconButton(
               icon: Image.asset('assets/icons/back.png'),
@@ -27,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             title,
             style: const TextStyle(
-              color: AppColor.cartTitleColor,
+              color: AppColor.whiteColor,
               fontSize: 16,
                 fontWeight: FontWeight.bold
             ),
@@ -35,8 +35,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Text(
             subtitle,
             style: const TextStyle(
-                color: AppColor.cartTitleColor,
-              fontSize: 11,
+                color: AppColor.whiteColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w500
 
             ),
           )

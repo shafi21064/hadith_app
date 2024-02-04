@@ -23,7 +23,7 @@ class CommonWidgets{
       padding: padding,
       width: Get.width * 1,
       decoration: BoxDecoration(
-        color: AppColor.cardColor,
+        color: AppColor.whiteColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: child,
@@ -38,8 +38,12 @@ class CommonWidgets{
       child: textWidget(
           text: leadingText,
           fontSize: 18,
-          color: AppColor.cartTitleColor),
+          color: AppColor.whiteColor),
     );
+  }
+
+  Widget progressBar(){
+    return const Center(child: CircularProgressIndicator(color: AppColor.primaryColor,));
   }
 
   Widget bottomSheetLogoAndIcon({required String icon, required String text}){
@@ -52,7 +56,7 @@ class CommonWidgets{
           textWidget(
               text: text,
             fontSize: 14,
-            color: AppColor.cartTitleColor
+            color: AppColor.bottomSheetText
           )
         ],
       ),
@@ -65,10 +69,10 @@ class CommonWidgets{
       builder: (context) {
         return Container(
           padding: const EdgeInsets.all(20),
-          height: Get.height * .55,
-          decoration: const BoxDecoration(
-            color: AppColor.cardColor,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20))
+          height: Get.height * .54,
+          decoration: BoxDecoration(
+            color: AppColor.bottomSheetColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20))
           ),
           child: Column(
             children: [
@@ -77,7 +81,7 @@ class CommonWidgets{
                 children: [
                   textWidget(
                       text: 'More Option',
-                    color: AppColor.cartTitleColor,
+                    color: AppColor.bottomSheetTitle,
                     fontSize: 16,
                     fontWeight: FontWeight.bold
                   ),
@@ -85,7 +89,7 @@ class CommonWidgets{
                     onTap: (){
                       Get.back();
                     },
-                    child: SvgPicture.asset('assets/icons/cross.svg', color: Colors.white,),
+                    child: SvgPicture.asset('assets/icons/cross.svg', color: AppColor.bottomSheetText,),
                   )
                 ],
               ),
@@ -151,8 +155,8 @@ class CommonWidgets{
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  textWidget(text: title, color: AppColor.cartTitleColor, fontSize: 16, fontWeight: FontWeight.bold),
-                  textWidget(text: subTitle, color: AppColor.cardSubtitleColor, fontSize: 12, fontWeight: FontWeight.normal),
+                  textWidget(text: title, color: AppColor.titleBlack, fontSize: 16, fontWeight: FontWeight.bold),
+                  textWidget(text: subTitle, color: AppColor.subtitleBlack, fontSize: 12, fontWeight: FontWeight.normal),
                 ],
               ),
             ),
@@ -162,8 +166,8 @@ class CommonWidgets{
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              textWidget(text: trailingTitle ?? '', color: AppColor.cartTitleColor, fontSize: 16, fontWeight: FontWeight.bold),
-              textWidget(text: trailingSubtitle ?? '', color: AppColor.cardTrailSubtitleColor, fontSize: 12, fontWeight: FontWeight.normal),
+              textWidget(text: trailingTitle ?? '', color: AppColor.titleBlack, fontSize: 16, fontWeight: FontWeight.bold),
+              textWidget(text: trailingSubtitle ?? '', color: AppColor.subtitleBlack, fontSize: 12, fontWeight: FontWeight.normal),
             ],
           ),
         ),
@@ -180,7 +184,7 @@ class CommonWidgets{
       width: Get.width * 1,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-          color: AppColor.backgroundColor
+          color: AppColor.backgroundGrey
       ),
       child: child,
     );

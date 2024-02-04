@@ -3,14 +3,14 @@ import 'package:job_task/data/local/db/app_db.dart';
 import 'package:job_task/res/compunent/common_widgets.dart';
 import 'package:job_task/utils/utils.dart';
 
-class DetailsWidgets{
+class SectionWidgets{
 
   CommonWidgets commonWidgets = CommonWidgets();
 
 
   Widget sectionColumn({required List<Widget> children,}){
     return commonWidgets.customCardContainer(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
             children: children
@@ -24,9 +24,9 @@ class DetailsWidgets{
           child: commonWidgets.textWidget(
               text: number,
               color: AppColor
-                  .chapterLeadingIconColor,
-              fontSize: 15,
-              fontWeight: FontWeight.bold
+                  .primaryColor,
+              fontSize: 14,
+              fontWeight: FontWeight.w800
           ),
     );
   }
@@ -39,14 +39,14 @@ class DetailsWidgets{
                 text: number,
                 style: const TextStyle(
                     fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w800,
                     color: AppColor
-                        .chapterLeadingIconColor),
+                        .primaryColor),
                 children: [
                   TextSpan(
                       text: ' $title',
                       style: const TextStyle(
-                          color: AppColor.cartTitleColor))
+                          color: AppColor.titleBlack))
                 ])),
       ],
     );
@@ -58,13 +58,15 @@ class DetailsWidgets{
       children: [
       sectionNumberAndTitle(number: number, title: title),
       const Divider(
-        thickness: .1,
-        color: Color(0xffEFEFEF),
+        thickness: 1,
+        color: AppColor.dividerColor,
       ),
       commonWidgets.textWidget(
           text: subtitle,
-          color: AppColor.cardSubtitleColor,
-          fontSize: 14)
+          color: AppColor.subtitleBlack,
+          fontSize: 12,
+        fontWeight: FontWeight.w400
+      )
     ],
     );
   }

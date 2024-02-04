@@ -7,45 +7,40 @@ import 'package:job_task/res/compunent/custom_app_bar.dart';
 import 'package:job_task/utils/utils.dart';
 import 'package:job_task/view/details/details.dart';
 
-class ChapterScreenTwo extends StatelessWidget {
+class ChapterScreen extends StatelessWidget {
   final Book book;
-  ChapterScreenTwo({super.key,required this.book});
+  ChapterScreen({super.key,required this.book});
 
   final dbController = Get.put(DbController());
+  final customWidget = CommonWidgets();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.cardColor,
+      backgroundColor: AppColor.primaryColor,
       appBar: CustomAppBar(
         title: book.title,
         subtitle: '${book.numberOfHadith} টি হাদিস',
       ),
-      body: CommonWidgets().customBackgraound(
+      body: customWidget.customBackgraound(
           child: Obx((){
           if(dbController.chapterList.isEmpty){
-            return const Center(child: CircularProgressIndicator());
+            return customWidget.progressBar();
           }else if(dbController.chapterList.isNotEmpty){
-            // return Text(snapshot.data!.first.bookName);
             return ListView.builder(
               itemCount: dbController.chapterList.length,
               itemBuilder: (context, index) {
                 ChapterData chapterData = dbController.chapterList[index];
-                return CommonWidgets().customCard(
+                return customWidget.customCard(
                   onTap: (){
                     Get.to(()=> DetailsScreen(
                         chapterData: chapterData,
                       book: book,
                     ));
                     dbController.getSectionList(chapterData.bookId, chapterData.chapterId);
-                    // dbController.getHadithList(chapterData.bookId, chapterData.chapterId,
-                    //     dbController.sectionList[index].sectionId);
-
-                   // dbController.getCombinedList(chapterData.bookId, chapterData.chapterId);
-                    print('id = ${chapterData.bookId} and ${chapterData.chapterId}');
                   },
                   leadingText: chapterData.number.toString(),
-                  leadingIconColor: AppColor.chapterLeadingIconColor,
+                  leadingIconColor: AppColor.primaryColor,
                   title: chapterData.title,
                   subTitle: 'হাদিসের রেঞ্জঃ ${chapterData.hadithRange}',
                 );
